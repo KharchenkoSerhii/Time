@@ -1,0 +1,496 @@
+// Обнуление ==============================================================================
+@import '_nullstyle.scss';
+// ========================================================================================
+
+
+
+// Шрифты =================================================================================
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import '_fontsstyle.scss';
+// ========================================================================================
+// Шрифты по умолчанию ====================================================================
+$fontFamily_bravo: 'BravoRGRegular';
+$fontFamily_ceremonious: 'Ceremonious One';
+$fontFamily_pf-din: 'PF Din Text Cond Pro';
+$font-family_pt-sans: 'PT Sans',sans-serif;
+
+
+// $fontSize: toRem(16); 
+//  где (16 px) розмер шрифта по умолчанию с макета
+// ========================================================================================
+
+
+
+// Функции ================================================================================
+// Определение функции toRem
+@function toRem($value) {
+	// Базовый размер шрифта (обычно 16px)
+	$baseFontSize: 16;
+	// Вычисление значения в rem
+	@return ($value / $baseFontSize) * 1rem;
+}
+
+// ========================================================================================
+
+
+// Переменные =============================================================================
+$mainColor: #333333; // цвет шрифта по умолчанию
+$darckColor: #1c242a;
+$bgColor: #1c242a;
+$goldColor: #bd9e68;
+// $bgColorSemi: #1F3584;
+// $bgColorLite: #15B2F5;
+// ========================================================================================
+
+
+
+// Настройки адаптивной сетки =============================================================
+$minWidth: 320; // Минимальная ширина страницы
+$maxWidth: 1920; // Ширина полотна (макета)
+$maxWidthContainer: toRem(952); // Ширина ограничивающего контейнера
+$containerPadding: toRem(32); // Отступ от контейнера по 15 слева и справа
+$containerWidth: $maxWidthContainer + $containerPadding; // Ширина срабатывания первого брекпоинта
+// Брейк-поинты------------------------------------------------------------------------------
+// $pc: em($containerWidth);
+$pc: $containerWidth;
+// $tablet: em(991.98);
+$tablet: toRem(991.98);
+// $mobile: em(767.98);
+$mobile: toRem(767.98);
+// $mobileSmall: em(479.98);
+$mobileSmall: toRem(479.98);
+// ========================================================================================
+
+
+
+// Миксины ================================================================================
+// adaptiveValue = ($property-css стиль, $pcSize-максимальный параметр, $mobSize-минимальный параметр)
+
+
+@mixin adaptiveValue($property, $pcSize, $mobSize) {
+	$addSize: $pcSize - $mobSize;
+	$addMobSize: $addSize + $addSize * 0.7;
+
+@media (min-width: toRem(1920)) {
+	#{$property}: #{$pcSize + px};
+}
+@media (max-width: toRem(1920)) {
+	@media (max-width: 767px) {
+			#{$property}: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth}));
+		}
+	
+		@media (min-width: 767px) {
+			#{$property}: calc(#{$mobSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+		}
+}
+}
+
+// ========================================================================================
+
+
+
+// ========================================================================================
+// Обобщенные блоки заголовки и т.д. ======================================================
+
+// Класс ibg--------------------------------------------------------
+// .ibg {
+// 	background-position: center;
+// 	background-size: cover;
+// 	background-repeat: no-repeat;
+// 	position: relative;
+
+// 	img {
+// 		display: none;
+// 	}
+// }
+// Класс ibg--------------------------------------------------------
+
+
+
+// Счетчик для списка-----------------------------------------------
+%listCounter {
+	list-style-type: none;
+	counter-reset: item;
+	li {
+		position: relative;
+		&:before {
+			counter-increment: item;
+			content: counter(item) ".";
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	}
+}
+// вызов в классе  ---  @extend %listCounter;
+// Счетчик для списка-----------------------------------------------
+
+
+// Обобщенные блоки заголовки и т.д. ======================================================
+// ========================================================================================
+
+
+
+// Общие блоки ============================================================================
+body {
+	font-family: $font-family_pt-sans;
+	font-size: toRem(14);
+	color: #000;
+}
+.wrapper {
+	width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+[class*=__container] {
+	max-width: toRem(984);
+	margin: 0 auto;
+	padding: 0 toRem(16);
+}
+// ========================================================================================
+
+
+
+
+
+
+
+
+
+// ========================================================================================
+// HEADER==================================================================================
+.header {
+	height: toRem(75);
+	background-color: $bgColor;
+	display: flex;
+	align-items: center;
+
+	// .header__container
+	&__container {
+		width: 100%;
+		position: relative;
+		// height: 100%;
+		// display: grid;
+		// grid-template-columns: toRem(200) 1fr toRem(200);
+		display: flex;
+		justify-content: space-between;
+		@include adaptiveValue('column-gap', 80, 0);
+		// column-gap: toRem(50);
+		align-items: end;
+		// align-items: center;
+		// @media (max-width: $mobile) {
+		// 	align-items: center;
+		// }
+	}
+
+	// .header__logo
+	&__logo {
+		position: relative;
+		z-index: 2;
+		max-width: toRem(200);
+		flex: 1 1 auto;
+		display: flex;
+		justify-content: center;
+		@media (max-width: toRem(890)) {
+			justify-content: flex-start;
+			flex: 0 1 auto;
+		}
+		@media (max-width: $mobile) {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	// .header__menu
+	&__menu {
+		flex: 1 1 auto;
+	}
+
+	// .header__actions
+	&__actions {
+		margin: 0 auto;
+	}
+}
+
+.menu-header {
+	// .menu-header__body
+	&__body {
+		@media (max-width: $mobile) {
+			background-color: #1c242ac4;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: -100%;
+			overflow: auto;
+			padding: toRem(85) toRem(0) toRem(20) toRem(0);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.5s ease;
+			&:after {
+				content: "";
+				// display: none;
+				position: fixed;
+				background-color: $bgColor;
+				top: 0;
+				left: 0;
+				height: toRem(75);
+				width: 100%;
+			}
+		}
+	}
+	
+	&__body.active {
+		opacity: 1;
+		visibility: visible;
+		top: 0;
+	}
+
+	// .menu-header__list
+	&__list {
+		max-width: toRem(460);
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		// flex-wrap: wrap;
+		@include adaptiveValue('column-gap', 32, 8);
+		// column-gap: toRem(16);
+		row-gap: toRem(8);
+		// column-gap: toRem(16);
+		@media (max-width: toRem(890)) {
+			justify-content: center;
+		}
+		@media (max-width: $mobile) {
+			flex-direction: column;
+			align-items: center;
+			// margin: toRem(100) toRem(40) toRem(40) toRem(40);
+			row-gap: toRem(30);
+		}
+	}
+
+	// .menu-header__list
+	&__list {
+
+	}
+
+	// .menu-header__link
+	&__link {
+		color: #fff;
+		font-family: $fontFamily_pf-din;
+		line-height: 1.5;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		white-space: nowrap;
+		@media (min-width:$tablet) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		@media (max-width: $mobile) {
+			@include adaptiveValue("font-size", 36, 28);
+		}
+	}
+}
+
+.burger {
+	display: none;
+
+	@media (max-width: $mobile) {
+		display: block;
+		position: relative;
+		width: toRem(30);
+		height: toRem(18);
+		z-index: 5;
+
+		@media (any-hover: none) {
+			cursor: default;
+		}
+
+		span,
+		&::before,
+		&::after {
+			content: "";
+			transition: all 0.3s ease 0s;
+			right: 0;
+			position: absolute;
+			width: 100%;
+			height: toRem(2);
+			background-color: $goldColor;
+		}
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			bottom: 0;
+		}
+
+		span {
+			top: calc(50% - toRem(1));
+		}
+
+		&.menu-open {
+			span {
+				transform: scale(0);
+			}
+
+			&::before,
+			&::after {}
+
+			&::before {
+				top: calc(50% - toRem(1));
+				transform: rotate(-45deg);
+			}
+
+			&::after {
+				bottom: calc(50% - toRem(1));
+				transform: rotate(45deg);
+			}
+		}
+	}
+}
+
+.actions-header {
+	display: flex;
+	column-gap: toRem(30);
+	// position: relative;
+	z-index: 2;
+	@media (max-width: toRem(890)) {
+		column-gap: toRem(8 );
+	}
+
+	// .actions-header__region
+	&__region {
+		color: #fff;
+		font-family: $fontFamily_pf-din;
+		line-height: 1.5;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		white-space: nowrap;
+		background: url('../img/header/header_region.png') no-repeat;
+		padding-left: 30px;
+		@media (min-width:$tablet) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		@media (max-width: $mobileSmall) {
+			display: none;
+		}
+		@media (max-width: toRem(890)) {
+			span {
+				display: none;
+			}
+		}
+	}
+
+	// .actions-header__user
+	&__user {}
+}
+
+.user-header {
+
+	// .user-header__icon
+	&__icon {
+		cursor: pointer;
+		transition: all 0.3s ease;
+		&:hover {
+			transform: scale(1.3);
+		}
+
+	}
+
+	// .user-header__menu
+	&__menu {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		right: toRem(0);
+		top: toRem(92);
+		padding: toRem(20);
+		background-color: $bgColor;
+		@media (min-width: $mobileSmall) {
+			margin: 0 toRem(12);
+		}
+		li {
+			margin-bottom: toRem(4);
+			&:last-child {
+				margin: 0;
+			}
+		}
+		@media (max-width: $mobileSmall) {
+			width: 100%;
+			left: 0;
+		}
+		transition: all 0.5s ease;
+		&.active {
+
+			opacity: 1;
+			visibility: visible;
+			top: toRem(60);
+			@media (max-width: $mobile) {
+				top: toRem(52);
+			}
+		}
+	}
+
+	// .user-header__link
+	&__link {
+		line-height: 1.78; /* 25/14 */
+		color: #ffffff;
+		white-space: nowrap;
+		padding-left: toRem(30);
+		@media (min-width:$tablet) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+
+		// .user-header__link_1
+		&_1 {
+			background: url("../img/header/header_user_hover1.png") toRem(2) center no-repeat;
+		}
+
+		// .user-header__link_2
+		&_2 {
+			background: url("../img/header/header_user_hover2.png") left center no-repeat;
+		}
+
+		// .user-header__link_3
+		&_3 {
+			background: url("../img/header/header_user_hover3.png") toRem(4) center no-repeat;
+		}
+
+		// .user-header__link_4
+		&_4 {
+			background: url("../img/header/header_user_hover4.png") left center no-repeat;
+		}
+	}
+}
+// HEADER==================================================================================
+// ========================================================================================
+
+
+
+
+
+// ========================================================================================
+// MAIN====================================================================================
+// MAIN====================================================================================
+// ========================================================================================
+
+
+
+
+
+
+
+
+
+
+// ========================================================================================
+// FOOTER==================================================================================

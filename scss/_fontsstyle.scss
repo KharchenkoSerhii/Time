@@ -1,0 +1,33 @@
+// подключение шрифтов
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+  @font-face {
+    font-family: 'BravoRGRegular'; //Имя шрифта
+    src: local('BravoRGRegular'), 
+        url("../../fonts/BravoRGRegular.woff") format('woff'),
+		url("../../fonts/BravoRGRegular.ttf") format('ttf');
+  }
+  @font-face {
+    font-family: 'Ceremonious One'; //Имя шрифта
+    src: local('ceremonious_one'), 
+        url("../../fonts/ceremonious_one.woff") format('woff'),
+		url("../../fonts/ceremonious_one.ttf") format('ttf');
+  }
+  @font-face {
+    font-family: 'PF Din Text Cond Pro'; //Имя шрифта
+    src: local('pfdintextcondpro-medium'), 
+        url("../../fonts/pfdintextcondpro-medium.woff") format('woff'),
+		url("../../fonts/pfdintextcondpro-medium.ttf") format('ttf');
+        font-weight: 500;
+        font-style: normal;
+  }
+  @font-face {
+    font-family: 'PF Din Text Cond Pro'; //Имя шрифта
+    src: local('pfdintextcondpro-regular'), 
+        url("../../fonts/pfdintextcondpro-regular.woff") format('woff'),
+		url("../../fonts/pfdintextcondpro-regular.ttf") format('ttf');
+        font-weight: 400;
+        font-style: normal;
+  }
+// ==========================================================
