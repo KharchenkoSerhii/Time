@@ -93,16 +93,16 @@ $mobileSmall: toRem(479.98);
 // Обобщенные блоки заголовки и т.д. ======================================================
 
 // Класс ibg--------------------------------------------------------
-// .ibg {
-// 	background-position: center;
-// 	background-size: cover;
-// 	background-repeat: no-repeat;
-// 	position: relative;
+.ibg {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
 
-// 	img {
-// 		display: none;
-// 	}
-// }
+	img {
+		display: none;
+	}
+}
 // Класс ibg--------------------------------------------------------
 
 
@@ -125,6 +125,53 @@ $mobileSmall: toRem(479.98);
 // вызов в классе  ---  @extend %listCounter;
 // Счетчик для списка-----------------------------------------------
 
+.title-item {
+	font-family: $fontFamily_ceremonious;
+	font-size: toRem(40);
+	line-height: 1.6;
+	color: #bb9c66;
+}
+
+.title-main {
+	font-family: $fontFamily_pf-din;
+	font-size: toRem(35);
+	line-height: 1.1;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+	font-weight: 500;
+
+	// .title-main_w
+	&_w {color: #ffffff;}
+}
+
+.title-text {
+	font-family: $font-family_pt-sans;
+	font-size: toRem(15);
+	line-height: 1.66;
+}
+
+.btn {
+	// box-sizing: content-box;
+	border-top: #cdb689 toRem(3) solid;
+	border-bottom: #8c632c toRem(3) solid;
+	position: relative;
+	&::before,&::after {
+		content: '';
+		position: absolute;
+		width: toRem(3);
+		height: 100%;
+		top: 0;
+		background: linear-gradient(180deg, rgba(205, 182, 137, 1) 50%, rgba(140, 99, 44, 1) 100%);
+	}
+	&::after {
+		content: '';
+		right: 0;
+	}
+	&::before {
+		content: '';
+		left: 0;
+	}
+}	
 
 // Обобщенные блоки заголовки и т.д. ======================================================
 // ========================================================================================
@@ -169,24 +216,16 @@ body {
 	&__container {
 		width: 100%;
 		position: relative;
-		// height: 100%;
-		// display: grid;
-		// grid-template-columns: toRem(200) 1fr toRem(200);
 		display: flex;
 		justify-content: space-between;
 		@include adaptiveValue('column-gap', 80, 0);
-		// column-gap: toRem(50);
 		align-items: end;
-		// align-items: center;
-		// @media (max-width: $mobile) {
-		// 	align-items: center;
-		// }
 	}
 
 	// .header__logo
 	&__logo {
 		position: relative;
-		z-index: 2;
+		z-index: 12;
 		max-width: toRem(200);
 		flex: 1 1 auto;
 		display: flex;
@@ -218,7 +257,7 @@ body {
 	// .menu-header__body
 	&__body {
 		@media (max-width: $mobile) {
-			background-color: #1c242ac4;
+			background-color: hsla(207, 16%, 26%, 0.98);
 			position: fixed;
 			width: 100%;
 			height: 100%;
@@ -229,6 +268,7 @@ body {
 			opacity: 0;
 			visibility: hidden;
 			transition: all 0.5s ease;
+			z-index: 10;
 			&:after {
 				content: "";
 				// display: none;
@@ -302,7 +342,7 @@ body {
 		position: relative;
 		width: toRem(30);
 		height: toRem(18);
-		z-index: 5;
+		z-index: 12;
 
 		@media (any-hover: none) {
 			cursor: default;
@@ -357,7 +397,7 @@ body {
 	display: flex;
 	column-gap: toRem(30);
 	// position: relative;
-	z-index: 2;
+	z-index: 12;
 	@media (max-width: toRem(890)) {
 		column-gap: toRem(8 );
 	}
@@ -427,7 +467,6 @@ body {
 		}
 		transition: all 0.5s ease;
 		&.active {
-
 			opacity: 1;
 			visibility: visible;
 			top: toRem(60);
@@ -480,8 +519,166 @@ body {
 
 // ========================================================================================
 // MAIN====================================================================================
+.page {}
+
+.main-slider {
+	position: relative;
+
+	// .main-slider__body
+	&__body {}
+
+	// .main-slider__item
+	&__item {}
+
+	// .main-slider__control
+	&__control {
+		position: absolute;
+		z-index: 2;
+		left: 50%;
+		transform: translate(-50%, 50%);
+		bottom: 0;
+		width: toRem(71);
+		height: toRem(71);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: toRem(12);
+		&::after {
+			content: '';
+			background-color: #fff;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			transform: rotate(45deg);
+		}
+	}
+}
+
+// .main-slider__wrapper {
+// 	align-items: stretch !important;
+// }
+// .swiper-autoheight .swiper-wrapper {
+// 	align-items: stretch !important;
+// }
+
+.control-main-slider {
+
+	// .control-main-slider__arrow
+	&__arrow {
+		position: relative;
+		z-index: 2;
+		background: url("../img/main/main-slider/main-slider_arrow.png") 0 0 no-repeat;
+		width: toRem(14);
+		height: toRem(24);
+		cursor: pointer;
+
+		// .control-main-slider__arrow_prev
+		&_prev {}
+
+		// .control-main-slider__arrow_next
+		&_next {
+			transform: rotate(180deg);
+		}
+	}
+
+	// .control-main-slider__decor
+	&__decor {
+		position: relative;
+		z-index: 2;
+		animation: decore 5s infinite linear;
+	}
+}
+@keyframes decore {
+	0% {}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.item-main-slider {
+	position: relative;
+	text-align: center;
+	padding: toRem(30) 0 toRem(100) 0;
+
+	// .item-main-slider__container
+	&__container {
+
+	}
+
+	// .item-main-slider__content
+	&__content {
+		max-width: toRem(840);
+		position: relative;
+		z-index: 2;
+		margin: 0 auto;
+	}
+
+	// .item-main-slider__bg
+	&__bg {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		// z-index: -1;
+
+		img {}
+	}
+}
+
+.content-slider {
+
+	// .content-slider__title
+	&__title {}
+
+	// .content-slider__text
+	&__text {
+		color: #fff;
+		max-width: toRem(700);
+		margin: 0 auto toRem(50) auto;
+	}
+
+	// .content-slider__btn
+	&__btn {
+		font-family: $font-family_pt-sans;
+		font-size: toRem(15);
+		line-height: toRem(54);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: #ffffff;
+		padding: toRem(18) toRem(54);
+		transition: all 0.3s ease;
+
+		&:hover {
+			background: rgba(187, 156, 102, 0.3);
+			padding: toRem(21) toRem(57);
+		}
+
+	}
+}
+
+.title-header {
+
+	// .title-header__item
+	&__item {
+		margin-bottom: toRem(20);
+	}
+
+	// .title-header__main
+	&__main {
+		margin-bottom: toRem(27);
+	}
+}
+
+
 // MAIN====================================================================================
 // ========================================================================================
+
+
+
+
 
 
 

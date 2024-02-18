@@ -1,18 +1,18 @@
 'use ctrict';
 // ==================================================================
 // функция ibg=======================================================
-// function ibg() {
+function ibg() {
 
-// 	let ibg = document.querySelectorAll(".ibg");
-// 	for (var i = 0; i < ibg.length; i++) {
-// 		if (ibg[i].querySelector('img')) {
-// 			ibg[i].style.backgroundImage =
-// 				'url(' + ibg[i].querySelector('img').getAttribute('src') + ')';
-// 		}
-// 	}
-// }
+	let ibg = document.querySelectorAll(".ibg");
+	for (var i = 0; i < ibg.length; i++) {
+		if (ibg[i].querySelector('img')) {
+			ibg[i].style.backgroundImage =
+				'url(' + ibg[i].querySelector('img').getAttribute('src') + ')';
+		}
+	}
+}
 
-// ibg();
+ibg();
 // функция ibg=======================================================
 // ==================================================================
 
@@ -91,27 +91,34 @@ burger.addEventListener('click', function (event){
 
 // ==================================================================
 // slider-swiper=====================================================
-// const reviewsSlider = new Swiper('.reviews__slider', {
-// 	speed: 400,
+const mainSlider = new Swiper('.main-slider__body', {
+	speed: 400,
+	loop: true,
 
-// 	// navigation: {
-// 	// 	nextEl: '.reviews__button-next',
-// 	// 	prevEl: '.reviews__button-prev',
-// 	// },
+	// navigation: {
+	// 	nextEl: '.reviews__button-next',
+	// 	prevEl: '.reviews__button-prev',
+	// },
 
-// 	navigation: {
-// 		nextEl: '.arrow-reviews.arrow-reviews__button-next',
-// 		prevEl: '.arrow-reviews.arrow-reviews__button-prev',
-// 	},
+	// navigation: {
+	// 	nextEl: '.arrow-reviews.arrow-reviews__button-next',
+	// 	prevEl: '.arrow-reviews.arrow-reviews__button-prev',
+	// },
 
-// 	pagination: {
-// 		el: '.reviews-pagination',
-// 		type: 'bullets',
-// 		clickable: true,
-// 	},
-// 	// loop: true,
-// 	autoHeight: true,
-// });
+	// Navigation arrows
+	navigation: {
+		nextEl: '.control-main-slider__arrow_next',
+		prevEl: '.control-main-slider__arrow_prev',
+	},
+
+	pagination: {
+		el: '.swiper-pagination',
+		type: 'bullets',
+		clickable: true,
+	},
+	loop: true,
+	autoHeight: true,
+});
 
 // slider-swiper=====================================================
 // ==================================================================
